@@ -1,34 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2035
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{79955436-92C6-438C-9A08-CE228C2E991D}"
-	ProjectSection(SolutionItems) = preProject
-		LICENSE = LICENSE
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarauderLib", "MarauderLib\MarauderLib.csproj", "{D3601F5A-CC2A-4997-A599-B4E8661A98E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marauder", "Marauder.csproj", "{5C4B327D-62B6-4616-BA84-39577FFCC73C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarauderHTTP", "MarauderHTTP\MarauderHTTP.csproj", "{E83B5741-F713-4348-9158-4D7D78F2A3DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Release|Any CPU = Release|Any CPU
 		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5C4B327D-62B6-4616-BA84-39577FFCC73C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5C4B327D-62B6-4616-BA84-39577FFCC73C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5C4B327D-62B6-4616-BA84-39577FFCC73C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5C4B327D-62B6-4616-BA84-39577FFCC73C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {12D86060-A281-4E53-A25B-67925AB234C2}
-	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		Policies = $0
-		$0.StandardHeader = $1
+		{D3601F5A-CC2A-4997-A599-B4E8661A98E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3601F5A-CC2A-4997-A599-B4E8661A98E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3601F5A-CC2A-4997-A599-B4E8661A98E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3601F5A-CC2A-4997-A599-B4E8661A98E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E83B5741-F713-4348-9158-4D7D78F2A3DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E83B5741-F713-4348-9158-4D7D78F2A3DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E83B5741-F713-4348-9158-4D7D78F2A3DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E83B5741-F713-4348-9158-4D7D78F2A3DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

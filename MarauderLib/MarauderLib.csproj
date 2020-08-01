@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{D3601F5A-CC2A-4997-A599-B4E8661A98E2}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>MarauderLib</RootNamespace>
+        <AssemblyName>MarauderLib</AssemblyName>
+        <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="Faction.Modules.Dotnet.Common, Version=1.0.7053.20574, Culture=neutral, PublicKeyToken=null">
+          <HintPath>..\packages\Faction.Modules.Dotnet.Common.2019.4.24\lib\net35\Faction.Modules.Dotnet.Common.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+          <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net35\Newtonsoft.Json.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="System" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Threading.Tasks.NET35, Version=3.0.2.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>..\packages\System.Threading.Tasks.Unofficial.3.1\lib\net35\System.Threading.Tasks.NET35.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="System.Xml" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Class1.cs" />
+        <Compile Include="Objects\AgentTask.cs" />
+        <Compile Include="Objects\Checkin.cs" />
+        <Compile Include="Objects\EncryptedMessage.cs" />
+        <Compile Include="Objects\EventArgs.cs" />
+        <Compile Include="Objects\RunningTask.cs" />
+        <Compile Include="Objects\StagingMessage.cs" />
+        <Compile Include="Objects\TaskResult.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="Services\Command.cs" />
+        <Compile Include="Services\Crypto.cs" />
+        <Compile Include="Services\Logging.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Include="packages.config" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+
+</Project>
