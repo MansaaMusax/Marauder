@@ -91,7 +91,7 @@ namespace MarauderLib.Services
         aes.Padding = PaddingMode.PKCS7;
         aes.Mode = CipherMode.CBC;
 
-        aes.Key = Encoding.UTF8.GetBytes(Marauder.Key);
+        aes.Key = Encoding.UTF8.GetBytes(State.Key);
         aes.GenerateIV();
 
         ICryptoTransform AESEncrypt = aes.CreateEncryptor(aes.Key, aes.IV);
@@ -99,14 +99,14 @@ namespace MarauderLib.Services
 
         string encryptedText = Convert.ToBase64String(AESEncrypt.TransformFinalBlock(buffer, 0, buffer.Length));
 
-        string hmac = Convert.ToBase64String(HmacSHA256(Convert.ToBase64String(aes.IV) + encryptedText, Marauder.Key));
+        string hmac = Convert.ToBase64String(HmacSHA256(Convert.ToBase64String(aes.IV) + encryptedText, State.Key));
 
         Dictionary<string, string> response = new Dictionary<string, string>();
-        if (!String.IsNullOrEmpty(Marauder.Id))
+        if (!String.IsNullOrEmpty(State.Id))
         {
           response = new Dictionary<string, string>
           {
-            { "AgentName", Marauder.Id },
+            { "AgentName", State.Id },
             { "IV", Convert.ToBase64String(aes.IV) },
             { "Message", encryptedText },
             { "HMAC", hmac }
@@ -115,7 +115,7 @@ namespace MarauderLib.Services
         else {
           response = new Dictionary<string, string>
           {
-            { "PayloadName", Marauder.PayloadName },
+            { "PayloadName", State.PayloadName },
             { "IV", Convert.ToBase64String(aes.IV) },
             { "Message", encryptedText },
             { "HMAC", hmac }
@@ -163,7 +163,7 @@ namespace MarauderLib.Services
           aes.BlockSize = 128;
           aes.Padding = PaddingMode.PKCS7;
           aes.Mode = CipherMode.CBC;
-          aes.Key = Encoding.UTF8.GetBytes(Marauder.Key);
+          aes.Key = Encoding.UTF8.GetBytes(State.Key);
 
           aes.IV = Convert.FromBase64String(IV);
 
@@ -193,7 +193,7 @@ namespace MarauderLib.Services
     public static bool ValidateEncryptedData(string iv, string encryptedText, string recievedHmac)
     {
       byte[] decodedHmac = Convert.FromBase64String(recievedHmac);
-      byte[] calculatedHmac = HmacSHA256(iv + encryptedText, Marauder.Key);
+      byte[] calculatedHmac = HmacSHA256(iv + encryptedText, State.Key);
       return BytesAreEqual(calculatedHmac, decodedHmac);
     }
 
@@ -232,15 +232,15 @@ namespace MarauderLib.Services
 #endif      
 
       string encryptedMsg = "";
-      if (Marauder.ResultQueue.Count > 0)
+      if (State.ResultQueue.Count > 0)
       {
-        string jsonMessage = JsonConvert.SerializeObject(Marauder.ResultQueue);
+        string jsonMessage = JsonConvert.SerializeObject(State.ResultQueue);
 #if DEBUG        
         Logging.Write("CryptoService", String.Format("Raw Json: {0}", jsonMessage));
 #endif        
         encryptedMsg = Encrypt(jsonMessage);
         
-        Marauder.ResultQueue = new List<TaskResult>();
+        State.ResultQueue = new List<TaskResult>();
       }
       // Clear results queue
       return encryptedMsg;
@@ -255,7 +255,7 @@ namespace MarauderLib.Services
       // foreach (TaskResponse response in responses)
       // {
 
-      //     Marauder.ResponseQueue.Remove(response);
+      //     State.ResponseQueue.Remove(response);
       // }
   
       string jsonMessage = JsonConvert.SerializeObject(new StagingMessage());
@@ -280,12 +280,12 @@ namespace MarauderLib.Services
       
       string decryptedContent = "";
 #if DEBUG   
-      Logging.Write("CryptoService", $"Current Payload Name: {Marauder.PayloadName}");
-      Logging.Write("CryptoService", $"Current Agent Name: {Marauder.Id}");
-      Logging.Write("CryptoService", $"Current Staging Id: {Marauder.StagingId}");
+      Logging.Write("CryptoService", $"Current Payload Name: {State.PayloadName}");
+      Logging.Write("CryptoService", $"Current Agent Name: {State.Id}");
+      Logging.Write("CryptoService", $"Current Staging Id: {State.StagingId}");
 #endif      
 
-      if (String.IsNullOrEmpty(Marauder.PayloadName))
+      if (String.IsNullOrEmpty(State.PayloadName))
       {
         List<EncryptedMessage> encryptedMessages = JsonConvert.DeserializeObject<List<EncryptedMessage>>(decodedMessage);
         foreach (EncryptedMessage encryptedMessage in encryptedMessages)

