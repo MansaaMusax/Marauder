@@ -128,7 +128,7 @@ _ReSharper*/
 # JustCode is a .NET coding add-in
 .JustCode
 
-# TeamCity is a build add-in
+# TeamCity is a src add-in
 _TeamCity*
 
 # DotCover is a Code Coverage Tool
@@ -187,7 +187,7 @@ PublishScripts/
 *.nupkg
 # The packages folder can be ignored because of Package Restore
 **/[Pp]ackages/*
-# except build/, which is used as an MSBuild target.
+# except src/, which is used as an MSBuild target.
 !**/[Pp]ackages/build/
 # Uncomment if necessary however generally it will be regenerated when needed
 #!**/[Pp]ackages/repositories.config
@@ -216,7 +216,7 @@ _pkginfo.txt
 # but keep track of directories ending in .cache
 !*.[Cc]ache/
 
-# build/
+# src/
 # Others
 ClientBin/
 ~$*
@@ -270,7 +270,7 @@ FakesAssemblies/
 .ntvs_analysis.dat
 node_modules/
 
-# Visual Studio 6 build log
+# Visual Studio 6 src log
 *.plg
 
 # Visual Studio 6 workspace options file
@@ -279,7 +279,7 @@ node_modules/
 # Visual Studio 6 auto-generated workspace file (contains which files were open etc.)
 *.vbw
 
-# Visual Studio LightSwitch build output
+# Visual Studio LightSwitch src output
 **/*.HTMLClient/GeneratedArtifacts
 **/*.DesktopClient/GeneratedArtifacts
 **/*.DesktopClient/ModelManifest.xml
@@ -315,7 +315,7 @@ __pycache__/
 # Telerik's JustMock configuration file
 *.jmconfig
 
-# BizTalk build output
+# BizTalk src output
 *.btp.cs
 *.btm.cs
 *.odx.cs
@@ -399,7 +399,7 @@ test-results/
 
 # JustCode is a .NET coding add-in
 
-# TeamCity is a build add-in
+# TeamCity is a src add-in
 
 # DotCover is a Code Coverage Tool
 
@@ -429,7 +429,7 @@ test-results/
 
 # NuGet Packages
 # The packages folder can be ignored because of Package Restore
-# except build/, which is used as an MSBuild target.
+# except src/, which is used as an MSBuild target.
 # Uncomment if necessary however generally it will be regenerated when needed
 #!**/[Pp]ackages/repositories.config
 # NuGet v3's project.json files produces more ignorable files
@@ -470,13 +470,13 @@ test-results/
 
 # Node.js Tools for Visual Studio
 
-# Visual Studio 6 build log
+# Visual Studio 6 src log
 
 # Visual Studio 6 workspace options file
 
 # Visual Studio 6 auto-generated workspace file (contains which files were open etc.)
 
-# Visual Studio LightSwitch build output
+# Visual Studio LightSwitch src output
 
 # Paket dependency manager
 
@@ -496,7 +496,7 @@ test-results/
 
 # Telerik's JustMock configuration file
 
-# BizTalk build output
+# BizTalk src output
 
 # OpenCover UI analysis results
 

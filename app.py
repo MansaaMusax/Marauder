@@ -11,7 +11,7 @@ app.config["LOG_LEVEL"] = os.environ.get("LOG_LEVEL", "DEBUG")
 api = Api(app, version='1.0', title='Faction File Service API',
           description='A service for building Marauder payloads',
           )
-faction_app = FactionApp(app_name="marauder-build", app=app)
+faction_app = FactionApp(app_name="marauder-src", app=app)
 
 parser = reqparse.RequestParser()
 parser.add_argument('agent_config', required=True, type=str, help="Agent configuration as JSON string"),
