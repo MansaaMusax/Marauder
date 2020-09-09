@@ -1,0 +1,41 @@
+{
+  "configuration": {
+    "beacon_internal": 5,
+    "jitter": 25,
+    "operating_system": "windows",
+    "version": ".NET35",
+    "architecture": "x86",
+    "debug": true
+  },
+  "transport": {
+    "name": "HTTP",
+    "configuration": {
+      "urls": [
+        "foo1",
+        "foo2"
+      ],
+      "headers": [
+        {
+          "name": "foo",
+          "value": "vfoo"
+        }
+      ],
+      "cookies": [
+        {
+          "name": "foo",
+          "value": "vfoo"
+        }
+      ],
+      "message_config": {
+        "defaut": "foo",
+        "prepend": "bar",
+        "append": "baz"
+      },
+      "server_response_config": {
+        "defaut": "foo",
+        "prepend": "bar",
+        "append": "baz"
+      }
+    }
+  }
+}

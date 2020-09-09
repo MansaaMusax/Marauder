@@ -19,7 +19,6 @@ parser.add_argument('transport_config', required=True, type=str, help="Transport
 
 def build_payload(agent_config: dict, transport_config: dict):
 
-
 @api.route('/')
 class Build(Resource):
     @authorized_groups(["standard_write"])
