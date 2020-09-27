@@ -1,41 +1,40 @@
 {
+  "name": "HTTP",
+  "staging_id": "foo",
+  "staging_key": "bar",
   "configuration": {
     "beacon_internal": 5,
     "jitter": 25,
+    "expiration_date": "",
     "operating_system": "windows",
-    "version": ".NET35",
+    "version": "NET35",
     "architecture": "x86",
-    "debug": true
-  },
-  "transport": {
-    "name": "HTTP",
-    "configuration": {
-      "urls": [
-        "foo1",
-        "foo2"
-      ],
-      "headers": [
-        {
-          "name": "foo",
-          "value": "vfoo"
-        }
-      ],
-      "cookies": [
-        {
-          "name": "foo",
-          "value": "vfoo"
-        }
-      ],
-      "message_config": {
-        "defaut": "foo",
-        "prepend": "bar",
-        "append": "baz"
-      },
-      "server_response_config": {
-        "defaut": "foo",
-        "prepend": "bar",
-        "append": "baz"
+    "debug": true,
+    "urls": [
+      "foo1",
+      "foo2"
+    ],
+    "headers": [
+      {
+        "name": "foo",
+        "value": "vfoo"
       }
+    ],
+    "cookies": [
+      {
+        "name": "foo",
+        "value": "vfoo"
+      }
+    ],
+    "message_config": {
+      "defaut": "foo",
+      "prepend": "bar",
+      "append": "baz"
+    },
+    "server_response_config": {
+      "defaut": "foo",
+      "prepend": "bar",
+      "append": "baz"
     }
   }
 }
