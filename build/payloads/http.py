@@ -2,7 +2,7 @@ import json
 from subprocess import call
 
 from factionpy.logger import log, error_out
-from app import faction_app
+from build.app import faction_app
 
 
 def build_http_payload(payload_config: dict):
@@ -30,19 +30,19 @@ def build_http_payload(payload_config: dict):
     })
 
     log("[Marauder Build] Writing agent config values to ./settings.json")
-    with open('./src/MarauderHTTP/settings.json', 'w') as settings_file:
+    with open('../src/MarauderHTTP/settings.json', 'w') as settings_file:
         json.dump(marauder_settings, settings_file)
 
     if build_config["debug"]:
         configuration = "Debug"
-        output_path = "./src/MarauderHTTP/bin/Debug/Marauder.exe"
+        output_path = "../src/MarauderHTTP/bin/Debug/Marauder.exe"
     else:
         configuration = "Release"
-        output_path = "./src/MarauderHTTP/bin/Release/Marauder.exe"
+        output_path = "../src/MarauderHTTP/bin/Release/Marauder.exe"
 
     restore_cmd = "nuget restore"
     log(f"[Marauder Build] Running restore command: {restore_cmd}", "debug")
-    restore_exit = call(restore_cmd, shell=True)
+    restore_exit = call(restore_cmd, shell=True, cwd="../src/MarauderHTTP/")
 
     if restore_exit == 0:
         # Setup version
@@ -54,10 +54,10 @@ def build_http_payload(payload_config: dict):
             return error_out("[Marauder Build] Could not find a match for version: {}".format(build_config["Version"]))
 
         # Setup Debug vs Release and build
-        build_cmd = f"msbuild Marauder.csproj /t:Build /p:Configuration={configuration} /p:OutputType=exe " \
+        build_cmd = f"msbuild MarauderHTTP.csproj /t:Build /p:Configuration={configuration} /p:OutputType=exe " \
                     f"/p:TargetFrameworkVersion={version} "
-        log(f"[Marauder Build] Running build command: {build_cmd}")
-        build_exit = call(build_cmd, shell=True)
+        log(f"[Marauder Build] Running service command: {build_cmd}")
+        build_exit = call(build_cmd, shell=True, cwd="../src/MarauderHTTP/")
     else:
         return error_out("[Marauder Build] Failed to restore packages.")
 

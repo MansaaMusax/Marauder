@@ -81,7 +81,7 @@ HTTP_PAYLOAD_VARIABLES = """
 """
 
 
-def get_maraurder_id():
+def get_marauder_id():
     result = None
 
     try:
@@ -103,7 +103,7 @@ def get_maraurder_id():
 
 
 def register_marauder():
-    marauder_id = get_maraurder_id()
+    marauder_id = get_marauder_id()
     if not marauder_id:
         try:
             current_app.faction.graphql(gql(CREATE_MARAUDER))
@@ -112,7 +112,7 @@ def register_marauder():
 
 
 def register_http_payload():
-    marauder_id = get_maraurder_id()
+    marauder_id = get_marauder_id()
     if marauder_id:
         try:
             variables = HTTP_PAYLOAD_VARIABLES.replace("MARAUDER_ID", marauder_id)
