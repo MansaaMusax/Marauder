@@ -1,0 +1,14 @@
+mutation Marauder {
+  insert_payload_type_one(
+    object: {
+        name: "MarauderHTTP",
+        description: "Marauder agent using HTTP",
+        configuration_schema: "\"beacon_internal\": 5, \"jitter\": 25, \"expiration_date\": \"\", \"operating_system\": \"windows\", \"version\": \"NET35\", \"architecture\": \"x86\", \"debug\": true, \"urls\": [ \"foo1\", \"foo2\" ], \"headers\": [ { \"name\": \"foo\", \"value\": \"vfoo\" } ], \"cookies\": [ { \"name\": \"foo\", \"value\": \"vfoo\" } ], \"message_config\": { \"defaut\": \"foo\", \"prepend\": \"bar\", \"append\": \"baz\" }, \"server_response_config\": { \"default\": \"foo\", \"prepend\": \"bar\", \"append\": \"baz\" }",
+        agent_type_id: "d79d49c7-7798-40b0-9e86-814e51aa0b5d",
+        transport_guid: "11b7dea7-30bd-4a70-83e1-de71fb4dce6d"
+    }
+  )
+  {
+    id
+  }
+}

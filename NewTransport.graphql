@@ -1,0 +1,16 @@
+mutation MyMutation(
+    $name: String = "Test Transport",
+    $protocol: String = "HTTPS",
+    $transport_guid: uuid = "2daece20-0d27-4068-b265-ceff27d3f3b2"
+)
+{
+    insert_transports_one(
+        object: {
+            name: $name,
+            protocol: $protocol,
+            transport_guid: $transport_guid
+        }
+    ) {
+      id
+    }
+}

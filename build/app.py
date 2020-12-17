@@ -26,11 +26,13 @@ class Build(Resource):
     @authorized_groups(["standard_write"])
     def post(self):
         try:
+            print(request.json)
             hr = HasuraRequest(request.json)
-            payload_name = get_payload_name(hr.new_data['payload_type_id'])
-            if payload_name == "Marauder HTTP":
-                build_http_payload(request.json)
+            payload_name = get_payload_name(str(hr.new_data['payload_type_id']))
+            if payload_name == "MarauderHTTP":
+                build_http_payload(hr.new_data)
             else:
                 log(f"Unknown payload name: {payload_name}", "error")
         except Exception as e:
-            return {"success": "false", "result": f"Error with request: {e}"}
+            return {"success": "false", "result": f"Error with request: {e}"}, 501
+
