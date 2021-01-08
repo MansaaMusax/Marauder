@@ -1,5 +1,5 @@
 mutation NewPayload(
-    $configuration: jsonb = "\"beacon_internal\": 5,\"jitter\": 25,\"operating_system\": \"windows\",\"urls\": [\"foo1\",\"foo2\"],\"message_config\": {\"defaut\": \"foo\",\"prepend\": \"bar\",\"append\": \"baz\"},\"debug\": true,\"server_response_config\": {\"defaut\": \"foo\",\"prepend\": \"bar\",\"append\": \"baz\"},\"headers\": [{\"value\": \"vfoo\",\"name\": \"foo\"}],\"cookies\": [{\"value\": \"vfoo\",\"name\": \"foo\"}],\"version\": \"NET35\",\"architecture\": \"x86\",\"expiration_date\": \"\"",
+    $configuration: jsonb = "{\"beacon_interval\": 5,\"jitter\": 25,\"operating_system\": \"windows\",\"urls\": [\"foo1\",\"foo2\"],\"message_config\": {\"defaut\": \"foo\",\"prepend\": \"bar\",\"append\": \"baz\"},\"debug\": true,\"server_response_config\": {\"defaut\": \"foo\",\"prepend\": \"bar\",\"append\": \"baz\"},\"headers\": [{\"value\": \"vfoo\",\"name\": \"foo\"}],\"cookies\": [{\"value\": \"vfoo\",\"name\": \"foo\"}],\"version\": \"NET35\",\"architecture\": \"x86\",\"expiration_date\": \"\"}",
     $created_by: uuid = "e0fa7a02-1de7-4443-a39a-9b7c78e91f62",
     $description: String = "Test Payload",
     $name: String = "Test1",

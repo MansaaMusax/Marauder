@@ -1,38 +1,32 @@
-import os
-import json
-from subprocess import call
-
-from flask import Flask, request
-from flask_restx import Api, Resource, reqparse
-from factionpy.logger import log, error_out
-from factionpy.flask import FactionApp
-from factionpy.flask.auth import authorized_groups, current_user
-from factionpy.services import HasuraRequest
+import uvicorn as uvicorn
+from fastapi import FastAPI, Depends, HTTPException
+from starlette.status import HTTP_500_INTERNAL_SERVER_ERROR, HTTP_400_BAD_REQUEST
+from factionpy.fastapi import user_has_write_access
+from factionpy.logger import log
+from factionpy.models import HasuraRequest, User
 
 from build.payloads import get_payload_name
 from build.payloads.http import build_http_payload
+from build.responses import BuildResponse
 
-app = Flask(__name__)
-app.config["LOG_TYPE"] = os.environ.get("LOG_TYPE", "stream")
-app.config["LOG_LEVEL"] = os.environ.get("LOG_LEVEL", "DEBUG")
-api = Api(app, version='1.0', title='Marauder Build Service',
-          description='A build for building Marauder payloads',
-          )
-faction_app = FactionApp(app_name="marauder-build", app=app)
+app = FastAPI()
 
 
-@api.route('/')
-class Build(Resource):
-    @authorized_groups(["standard_write"])
-    def post(self):
-        try:
-            print(request.json)
-            hr = HasuraRequest(request.json)
-            payload_name = get_payload_name(str(hr.new_data['payload_type_id']))
-            if payload_name == "MarauderHTTP":
-                build_http_payload(hr.new_data)
-            else:
-                log(f"Unknown payload name: {payload_name}", "error")
-        except Exception as e:
-            return {"success": "false", "result": f"Error with request: {e}"}, 501
+@app.post('/', response_model=BuildResponse)
+async def build(hr: HasuraRequest, user: User = Depends(user_has_write_access)):
+    try:
+        payload_name = get_payload_name(str(hr.new_data['payload_type_id']))
+        if payload_name == "MarauderHTTP":
+            return build_http_payload(hr.new_data)
+        else:
+            log(f"Unknown payload name: {payload_name}", "error")
+            raise HTTPException(
+                status_code=HTTP_400_BAD_REQUEST, detail=f"Unknown payload name: {payload_name}"
+            )
+    except Exception as e:
+        raise HTTPException(
+            status_code=HTTP_500_INTERNAL_SERVER_ERROR, detail=f"Error with request: {e}"
+        )
 
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)

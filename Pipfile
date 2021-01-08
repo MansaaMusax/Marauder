@@ -4,9 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-Flask = "*"
-factionpy = "==2020.9.7.dev3"
-flask-restx = "*"
+fastapi = "*"
+unvicorn = "*"
+factionpy = "==2021.1.7.dev2"
 
 [dev-packages]
 

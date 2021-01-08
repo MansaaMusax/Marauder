@@ -37,10 +37,10 @@ def build_http_payload(payload_config: dict):
 
     if build_config["debug"]:
         configuration = "Debug"
-        output_path = "./src/MarauderHTTP/bin/Debug/Marauder.exe"
+        output_path = "./src/MarauderHTTP/bin/Debug/MarauderHTTP.exe"
     else:
         configuration = "Release"
-        output_path = "./src/MarauderHTTP/bin/Release/Marauder.exe"
+        output_path = "./src/MarauderHTTP/bin/Release/MarauderHTTP.exe"
 
     restore_cmd = "nuget restore"
     log(f"[Marauder Build] Running restore command: {restore_cmd}", "debug")
